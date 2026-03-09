@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "FULLSTACK",
+    "Projects": [
+      {
+        "Path": "TaskManagerAPI.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "..\\ReactTaskManager\\reacttaskmanager.esproj",
+        "Action": "Start",
+        "DebugTarget": "localhost (Chrome)"
+      }
+    ]
+  }
+]
