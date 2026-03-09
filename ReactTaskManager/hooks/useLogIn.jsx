@@ -1,7 +1,5 @@
-function useLogIn() {
-  return (
-    <p>Hello world!</p>
-  );
+export default function useLogIn() {
+    function validateLogIn(username) {
+        
+    }
 }
-
-export default useLogIn;

@@ -16,6 +16,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<TaskSqlService>();
+builder.Services.AddScoped<LogInSqlService>();
 
 var app = builder.Build();
 

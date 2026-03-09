@@ -1,9 +1,9 @@
 ﻿import LogInPage from "../pages/LogInPage"
 import TaskPage from "../pages/TaskPage"
 
-import "./TaskStyle.css"
-
 import { useState } from 'react'
+
+import "./TaskStyle.css"
 
 export default function App() {
     const [loggedUser, setLoggedUser] = useState("");
