@@ -1,23 +1,10 @@
 ﻿import { useState } from 'react'
+import useLogIn from "../hooks/useLogin"
 
 export default function LogInForm({onLogInSucceeded}) {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
-
-    async function validateLogIn(login, password) {
-        const response = await fetch("https://localhost:7176/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: login,
-                password: password
-            })
-        });
-        const result = await response.json();
-        return result;
-    }
+    const { validateLogIn } = useLogIn();
 
     async function handleButtonClick() {
         if (login !== "" && password !== "") {

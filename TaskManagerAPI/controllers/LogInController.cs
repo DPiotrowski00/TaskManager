@@ -27,12 +27,6 @@ namespace TaskManagerAPI.controllers
             return Ok(passwordHash);
         }
 
-        [HttpPut]
-        public ActionResult createUser([FromBody] LoginRequest request)
-        {
-            return Ok();
-        }
-
         [HttpPost]
         public async Task<ActionResult<bool>> ValidateLogIn([FromBody] LoginRequest request)
         {
@@ -55,6 +49,17 @@ namespace TaskManagerAPI.controllers
             {
                 return Ok(false);
             }
+        }
+
+        [HttpPost]
+        [Route("register")]
+        public async Task<ActionResult<bool>> RegisterUser([FromBody] LoginRequest request)
+        {
+            var passwordHasher = new PasswordHasher<object>();
+            var passwordHash = passwordHasher.HashPassword(request.Username, request.Password);
+            
+            var result = await _logInSqlService.createUser(request.Username, passwordHash);
+            return Ok(result);
         }
     }
 }

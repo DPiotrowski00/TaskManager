@@ -1,5 +1,6 @@
-﻿import LogInPage from "../pages/LogInPage"
-import TaskPage from "../pages/TaskPage"
+﻿import LogInPage from "../pages/LogInPage";
+import TaskPage from "../pages/TaskPage";
+import RegisterPage from "../pages/RegisterPage";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -17,6 +18,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<LogInPage />} />
                 <Route path="/tasks" element={<TaskPage />} />
+                <Route path="/register" element={<RegisterPage />} />
             </Routes>
         </BrowserRouter>
     );

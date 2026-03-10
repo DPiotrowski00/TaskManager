@@ -32,7 +32,7 @@ namespace TaskManagerAPI.services
             }
         }
 
-        public async Task<bool> checkIfUsernameExists(string username)
+        private async Task<bool> checkIfUsernameExists(string username)
         {
             string query = @"
                            SELECT 
@@ -55,7 +55,7 @@ namespace TaskManagerAPI.services
             }
         }
 
-        public async Task createUser(string username, string passwordHash)
+        public async Task<bool> createUser(string username, string passwordHash)
         {
             string query = @"
                            INSERT INTO logindata (username, password) VALUES (@username, @passwordHash)
@@ -64,12 +64,20 @@ namespace TaskManagerAPI.services
             var connection = CreateConnection();
             try
             {
-                await connection.ExecuteAsync(query, new { username, passwordHash });
+                if(!await checkIfUsernameExists(username))
+                {
+                    await connection.ExecuteAsync(query, new { username, passwordHash });
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return;
+                return false;
             }
         }
     }
