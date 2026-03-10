@@ -1,14 +1,23 @@
 import { useState, useEffect } from 'react'
 
 import useTasks from "../hooks/useTasks";
+import { useLocation, Navigate } from "react-router-dom";
 
 import FilterBar from "../components/FilterBar";
 import TaskList from "../components/TaskList";
 import TaskForm from "../components/TaskForm";
 
 export default function TaskPage() {
+    const location = useLocation();
+    const user = location.state?.user;
+
+    if (!user) {
+        return <Navigate to="/" />
+    }
+
     const { tasks, addTask, toggleTask, deleteTask, deleteCompleted } = useTasks();
     const [filter, setFilter] = useState("All");
+
     let filteredTasks = tasks;
     if (filter === "Completed") {
         filteredTasks = filteredTasks.filter(t => t.completed);
@@ -22,6 +31,7 @@ export default function TaskPage() {
 
     return (
         <>
+            <p>Zalogowano jako: {user}</p>
             <TaskForm addTask={addTask} />
             <FilterBar filter={filter} setFilter={setFilter} unfinishedTaskCount={unfinishedTaskCount} deleteCompleted={deleteCompleted} />
             <TaskList tasks={filteredTasks} onCompletedClick={toggleTask} onDeleteClick={deleteTask} />

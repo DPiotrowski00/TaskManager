@@ -30,10 +30,10 @@ namespace TaskManagerAPI.controllers
         [HttpPut]
         public ActionResult createUser([FromBody] LoginRequest request)
         {
-
+            return Ok();
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult<bool>> ValidateLogIn([FromBody] LoginRequest request)
         {
             var dbPasswordHash = await _logInSqlService.getPasswordHash(request.Username);

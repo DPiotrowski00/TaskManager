@@ -4,13 +4,26 @@ export default function LogInForm({onLogInSucceeded}) {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
-    async function getPassword(login) {
-        const pass = await fetch(`https://localhost:7176/login/${login}`)[0];
+    async function validateLogIn(login, password) {
+        const response = await fetch("https://localhost:7176/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: login,
+                password: password
+            })
+        });
+        const result = await response.json();
+        return result;
     }
 
-    function handleButtonClick() {
+    async function handleButtonClick() {
         if (login !== "" && password !== "") {
-            onLogInSucceeded(login);
+            if (await validateLogIn(login, password)) {
+                onLogInSucceeded(login);
+            }
         }
         else {
             console.log("Nie wpisano loginu lub hasła!");

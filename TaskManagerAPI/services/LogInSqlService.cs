@@ -17,7 +17,7 @@ namespace TaskManagerAPI.services
         public async Task<string> getPasswordHash(string username)
         {
             string query = @"
-                           SELECT password FROM logindata WHERE username = @username
+                           SELECT password FROM logindata WHERE username = BINARY @username
                            ";
 
             var connection = CreateConnection();
@@ -37,7 +37,7 @@ namespace TaskManagerAPI.services
             string query = @"
                            SELECT 
                            CASE
-                           WHEN EXISTS(SELECT 1 from logindata WHERE username = @username)
+                           WHEN EXISTS(SELECT 1 from logindata WHERE username = BINARY @username)
                            THEN 1
                            ELSE 0
                            END

@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { useLocation } from "react-router-dom";
 
 async function getTasks() {
     const response = await fetch("https://localhost:7176/task");
@@ -12,6 +13,8 @@ async function getTasks() {
 
 export default function useTasks() {
     const [tasks, setTasks] = useState([]);
+    const location = useLocation();
+    const user = location.state?.user;
 
     async function loadTasks() {
         try {
@@ -47,6 +50,7 @@ export default function useTasks() {
 
             const newTask = {
                 text: passText,
+                creator: user,
                 completed: false,
             }
 

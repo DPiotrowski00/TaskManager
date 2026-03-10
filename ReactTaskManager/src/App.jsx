@@ -1,28 +1,23 @@
 ﻿import LogInPage from "../pages/LogInPage"
 import TaskPage from "../pages/TaskPage"
 
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./TaskStyle.css"
 
 export default function App() {
-    const [loggedUser, setLoggedUser] = useState("");
+    //const [loggedUser, setLoggedUser] = useState("");
 
     function onLogIn(username) {
         setLoggedUser(username);
     }
 
-    if (loggedUser === "") {
-        return (
-            <LogInPage onLogIn={onLogIn} />
-        );
-    }
-    else {
-        return (
-            <>
-                <p>Zalogowano jako: {loggedUser}</p>
-                <TaskPage />
-            </>
-        );
-    }
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<LogInPage />} />
+                <Route path="/tasks" element={<TaskPage />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
