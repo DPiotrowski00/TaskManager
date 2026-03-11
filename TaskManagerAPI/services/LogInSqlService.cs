@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Identity;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
@@ -78,6 +79,24 @@ namespace TaskManagerAPI.services
             {
                 Console.WriteLine(ex.Message);
                 return false;
+            }
+        }
+
+        public async Task<int> getUserId(string username)
+        {
+            string query = @"
+                           SELECT id FROM logindata WHERE username = @username
+                           ";
+
+            var connection = CreateConnection();
+            try
+            {
+                return await connection.QuerySingleAsync<int>(query, new { username });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
             }
         }
     }

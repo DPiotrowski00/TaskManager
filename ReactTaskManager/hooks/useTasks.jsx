@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
 
 async function getTasks() {
-    const response = await fetch("https://localhost:7176/task");
+    const response = await fetch("https://localhost:7176/task", {
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    });
 
     if (!response.ok) {
         throw new Error("Failed to fetch tasks");
@@ -13,8 +16,6 @@ async function getTasks() {
 
 export default function useTasks() {
     const [tasks, setTasks] = useState([]);
-    const location = useLocation();
-    const user = location.state?.user;
 
     async function loadTasks() {
         try {
@@ -37,6 +38,7 @@ export default function useTasks() {
         await fetch("https://localhost:7176/task", {
             method: "PATCH",
             headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(updateTask)
@@ -50,13 +52,14 @@ export default function useTasks() {
 
             const newTask = {
                 text: passText,
-                creator: user,
+                creator: localStorage.getItem("user"),
                 completed: false,
             }
 
             await fetch("https://localhost:7176/task", {
                 method: "POST",
                 headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(newTask)
@@ -69,7 +72,10 @@ export default function useTasks() {
 
     async function deleteTask(id) {
         await fetch(`https://localhost:7176/task/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
         });
         loadTasks();
     }
@@ -78,7 +84,10 @@ export default function useTasks() {
         const tasksToDelete = tasks.filter(t => t.completed);
         for (let i = 0; i < tasksToDelete.length; i++) {
             await fetch(`https://localhost:7176/task/${tasksToDelete[i].id}`, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
             });
         }
         loadTasks();

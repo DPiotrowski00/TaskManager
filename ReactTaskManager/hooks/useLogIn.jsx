@@ -10,8 +10,15 @@ export default function useLogIn() {
                 password: password
             })
         });
-        const result = await response.json();
-        return result;
+        const result = await response.text();
+        if (result === "") {
+            return false;
+        }
+        else {
+            localStorage.setItem("token", result);
+            localStorage.setItem("user", login);
+            return true;
+        }
     }
 
     async function tryRegister(login, password) {

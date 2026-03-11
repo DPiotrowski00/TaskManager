@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TaskManagerAPI.models;
 using TaskManagerAPI.services;
@@ -11,6 +12,7 @@ namespace TaskManagerAPI.controllers
     {
         private readonly TaskSqlService _sqlService = service;
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<TaskModel>> CreateTask([FromBody] TaskModel task)
         {
@@ -29,6 +31,7 @@ namespace TaskManagerAPI.controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<TaskModel>> GetTasks()
         {
@@ -43,6 +46,7 @@ namespace TaskManagerAPI.controllers
             }
         }
 
+        [Authorize]
         [HttpPatch]
         public async Task<ActionResult<TaskModel>> UpdateTask([FromBody] TaskModel task)
         {
@@ -58,6 +62,7 @@ namespace TaskManagerAPI.controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTask(int id)
         {

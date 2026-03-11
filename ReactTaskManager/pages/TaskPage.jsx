@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react'
 
 import useTasks from "../hooks/useTasks";
-import { useLocation, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import FilterBar from "../components/FilterBar";
 import TaskList from "../components/TaskList";
 import TaskForm from "../components/TaskForm";
 
 export default function TaskPage() {
-    const location = useLocation();
-    const user = location.state?.user;
 
-    if (!user) {
+    const token = localStorage.getItem("token");
+    if (!token) {
         return <Navigate to="/" />
     }
 
     const { tasks, addTask, toggleTask, deleteTask, deleteCompleted } = useTasks();
     const [filter, setFilter] = useState("All");
+    const user = localStorage.getItem("user");
 
     let filteredTasks = tasks;
     if (filter === "Completed") {

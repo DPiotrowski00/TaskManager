@@ -1,7 +1,11 @@
-function NavBar() {
-  return (
-    <p>Hello world!</p>
-  );
-}
+import { Link } from "react-router-dom";
 
-export default NavBar;
+export default function NavBar() {
+    return (
+        <nav>
+            <Link to="/tasks">Zadania</Link> | {" "}
+            <Link to="/">Logowanie</Link> | {" "}
+            <Link to="/register">Rejestracja</Link>
+        </nav>
+    );
+}

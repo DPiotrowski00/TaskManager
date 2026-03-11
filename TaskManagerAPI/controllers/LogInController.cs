@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using TaskManagerAPI.services;
 
@@ -13,28 +17,33 @@ namespace TaskManagerAPI.controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class LogInController (LogInSqlService service) : ControllerBase
+    public class LogInController (LogInSqlService service, JwtService jwtService) : ControllerBase
     {
         private readonly LogInSqlService _logInSqlService = service;
+        private readonly JwtService _jwtService = jwtService;
+
+        private string hashPassword(string username, string password)
+        {
+            var passwordHasher = new PasswordHasher<object>();
+            return passwordHasher.HashPassword(username, password);
+        }
 
         [HttpGet]
         [Route("hashgen")]
         public ActionResult<string> getHash([FromBody] LoginRequest request)
         {
-            var passwordHasher = new PasswordHasher<object>();
-            var passwordHash = passwordHasher.HashPassword(request.Username, request.Password);
-
-            return Ok(passwordHash);
+            return Ok(hashPassword(request.Username, request.Password));
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> ValidateLogIn([FromBody] LoginRequest request)
+        public async Task<ActionResult<string>> ValidateLogIn([FromBody] LoginRequest request)
         {
             var dbPasswordHash = await _logInSqlService.getPasswordHash(request.Username);
+            var id = await _logInSqlService.getUserId(request.Username);
 
             if (dbPasswordHash == "")
             {
-                return BadRequest(false);
+                return BadRequest("");
             }
 
             var passwordHasher = new PasswordHasher<object>();
@@ -43,11 +52,11 @@ namespace TaskManagerAPI.controllers
 
             if (result == PasswordVerificationResult.Success)
             {
-                return Ok(true);
+                return Ok(_jwtService.generateToken(id, request.Username));
             }
             else
             {
-                return Ok(false);
+                return Ok("");
             }
         }
 
@@ -55,10 +64,7 @@ namespace TaskManagerAPI.controllers
         [Route("register")]
         public async Task<ActionResult<bool>> RegisterUser([FromBody] LoginRequest request)
         {
-            var passwordHasher = new PasswordHasher<object>();
-            var passwordHash = passwordHasher.HashPassword(request.Username, request.Password);
-            
-            var result = await _logInSqlService.createUser(request.Username, passwordHash);
+            var result = await _logInSqlService.createUser(request.Username, hashPassword(request.Username, request.Password));
             return Ok(result);
         }
     }
