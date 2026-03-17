@@ -3,6 +3,8 @@ A simple full-stack application for task management
 
 ## Demo
 
+![screenshot](demo.png)
+
 ## Features
 ### API
 - Request logging through middleware,
