@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 
 async function getTasks() {
     const response = await fetch("https://localhost:7176/task", {
@@ -71,13 +71,15 @@ export default function useTasks() {
     }
 
     async function deleteTask(id) {
-        await fetch(`https://localhost:7176/task/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        });
-        loadTasks();
+        if (window.confirm("Na pewno usunąć?")) {
+            await fetch(`https://localhost:7176/task/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            });
+            loadTasks();
+        }
     }
 
     async function deleteCompleted() {

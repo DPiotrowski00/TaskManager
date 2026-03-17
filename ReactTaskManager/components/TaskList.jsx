@@ -7,7 +7,7 @@
                 <td><input type="checkbox" checked={task.completed} onChange={() => onCompletedClick(task.id)}></input></td>
                 <td>{task.createdAt}</td>
                 <td>{task.creator}</td>
-                <td><button onClick={() => onDeleteClick(task.id)}>X</button></td>
+                <td className="actions"><button className="delete-button" onClick={() => onDeleteClick(task.id)}>X</button></td>
             </tr>
         );
     });

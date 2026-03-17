@@ -18,10 +18,10 @@ export default function LogInForm({onLogInSucceeded}) {
     }
 
     return (
-        <div>
-            <input type="text" name="LogIn" value={login} onChange={(e) => setLogin(e.target.value)} />
-            <input type="password" name="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={handleButtonClick}>Zaloguj</button>
+        <div className="log-div">
+            <input className="text-input" type="text" name="LogIn" value={login} onChange={(e) => setLogin(e.target.value)} />
+            <input className="text-input" type="password" name="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <button className="button" onClick={handleButtonClick}>Zaloguj</button>
         </div>
     );
 }

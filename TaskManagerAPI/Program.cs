@@ -1,5 +1,6 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TaskManagerAPI.middleware;
 using TaskManagerAPI.services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +41,8 @@ builder.Services.AddScoped<JwtService>();
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<LoggingMiddleware>();
 app.UseCors("react");
 app.UseAuthentication();
 app.UseAuthorization();

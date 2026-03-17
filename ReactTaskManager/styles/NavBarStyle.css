@@ -1,0 +1,29 @@
+nav.nav {
+    display: flex;
+    padding: 10px;
+    background: lightblue;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    border: black solid 1px;
+}
+
+a.nav {
+    display: inline-block;
+    padding: 5px 10px;
+    background: linear-gradient(135deg, #0b69db, #5f8ec7);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border: 1px solid black;
+}
+
+a.nav:hover {
+    background: linear-gradient(135deg, #1a7fff, #7aa6db);
+}
+
+a.nav:active {
+    background: linear-gradient(135deg, #084fa6, #4d79a8);
+}

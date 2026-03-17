@@ -1,0 +1,130 @@
+html, body {
+    height: 100%;
+    margin: 1px;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient( to right, #2196f31A 0%, #ffffff 20%, #ffffff 80%, #2196f31A 100% );
+    background-attachment: fixed;
+}
+
+p {
+    font-weight: 1000;
+}
+
+.button {
+    background: linear-gradient(135deg, #0b69db, #5f8ec7);
+    padding: 5px 20px;
+    font-weight: 500;
+    border-radius: 8px;
+    font-size: 14px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    color: white;
+}
+
+.button:hover {
+    background: linear-gradient(135deg, #1a7fff, #7aa6db);
+}
+
+.button:active {
+    background: linear-gradient(135deg, #084fa6, #4d79a8);
+}
+
+input.text-input {
+    border-radius: 8px;
+    border: 1px solid darkblue;
+    width: 100%;
+    padding: 1px 5px;
+}
+
+.form-div {
+    display: flex;
+    gap: 10px;
+}
+
+.log-div {
+    margin: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.delete-button {
+    background: red;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button:hover {
+    background: #fc3d3d;
+}
+
+.delete-button:active {
+    background: #ad0202;
+}
+
+legend {
+    font-weight: 1000;
+}
+
+fieldset {
+    margin: 10px 0px 10px 0px;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.radio {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: 8px;
+}
+
+.radio-label {
+    font-style: italic;
+    font-size: 18px;
+}
+
+table {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th {
+    border-bottom: 2px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+tr:not(:last-child) td {
+    border-bottom: 1px solid black;
+}
+
+th:not(:last-child),
+td:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

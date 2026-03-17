@@ -21,10 +21,10 @@ export default function RegisterPage() {
 
     return (
         <>
-            <div>
-                <input type="text" value={login} onChange={ (e) => setLogin(e.target.value) } />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button onClick={handleClick}>Zarejestruj</button>
+            <div className="log-div">
+                <input className="text-input" type="text" value={login} onChange={ (e) => setLogin(e.target.value) } />
+                <input className="text-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button className="button" onClick={handleClick}>Zarejestruj</button>
             </div>
         </>
     );

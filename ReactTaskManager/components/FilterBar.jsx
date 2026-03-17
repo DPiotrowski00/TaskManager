@@ -1,22 +1,22 @@
 ﻿export default function FilterBar({ filter, setFilter, unfinishedTaskCount, deleteCompleted }) {
     return (
         <fieldset>
-            <legend>Wybierz typ filtrowania:</legend>
+            <legend>Filter</legend>
             <div>
-                <label>
-                    <input type="radio" name="filter" value="Wszystkie" checked={filter === "All"} onChange={() => setFilter("All")} />
+                <label className="radio-label">
+                    <input className="radio" type="radio" name="filter" value="Wszystkie" checked={filter === "All"} onChange={() => setFilter("All")} />
                     Wszystkie
                 </label>
             </div>
             <div>
-                <label>
-                    <input type="radio" name="filter" value="Zakończone" checked={filter === "Completed"} onChange={() => setFilter("Completed")} />
+                <label className="radio-label">
+                    <input className="radio" type="radio" name="filter" value="Zakończone" checked={filter === "Completed"} onChange={() => setFilter("Completed")} />
                     Zakończone
                 </label>
             </div>
             <div>
-                <label>
-                    <input type="radio" name="filter" value="Niezakończone" checked={filter === "Uncompleted"} onChange={() => setFilter("Uncompleted")} />
+                <label className="radio-label">
+                    <input className="radio" type="radio" name="filter" value="Niezakończone" checked={filter === "Uncompleted"} onChange={() => setFilter("Uncompleted")} />
                     Niezakończone
                 </label>
             </div>
@@ -24,7 +24,7 @@
                 <p>{"Liczba bieżących zadań: " + unfinishedTaskCount}</p>
             </div>
             <div>
-                <button onClick={deleteCompleted}>Usuń zakończone</button>
+                <button className="button" onClick={deleteCompleted}>Usuń zakończone</button>
             </div>
         </fieldset>
     );

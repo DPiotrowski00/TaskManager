@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import "./TaskStyle.css"
+import "../styles/DefaultPageStyle.css";
 
 export default function App() {
     return (
