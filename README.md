@@ -32,11 +32,13 @@ A simple full-stack application for task management
 - CSS.
 
 ## Installation
+In the main project folder you will find a Setup folder which contains all files necessary to set up the app.
+
 1. Open MySql Workbench,
-2. In the project's main folder there is an image of the database, import it through the Workbench,
+2. In the Setup folder there is an image of the database, import it through the Workbench,
 3. Open Visual Studio,
 4. Clone the project,
-5. In the main project folder there is an "appsettings.json" file, modify the DefaultConnection (put your connection string in there) and Key (make up an JWT API key and put it in here),
+5. In the setup folder there is an "appsettings.json" file, modify the DefaultConnection (put your connection string in there) and Key (make up an JWT API key and put it in here),
 6. If everything was done right and the database is running, go ahead and run the application in the default configuration.
 
 ## Usage
