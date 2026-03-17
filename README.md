@@ -1,5 +1,5 @@
 # TaskManager
-A simple full-stack application for task management
+A full-stack task management application built with ASP.NET Core and React, featuring JWT authentication, middleware-based logging, and secure password handling.
 
 ## Demo
 
